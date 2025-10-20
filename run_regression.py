@@ -27,11 +27,10 @@ def load_ff3_monthly() -> pd.DataFrame:
 
     with zipfile.ZipFile(io.BytesIO(resp.content)) as zf:
         name = next(n for n in zf.namelist() if n.lower().endswith(".csv"))
-        raw = zf.read(name).decode("latin-1", errors="ignore")  # latin-1 tolerates odd chars
+        raw = zf.read(name).decode("latin-1", errors="ignore") 
 
     lines = raw.splitlines()
 
-    # Find the first data row: "YYYYMM,<numbers...>"
     start = None
     for i, line in enumerate(lines):
         if re.match(r"^\s*\d{6}\s*,", line):
@@ -40,20 +39,17 @@ def load_ff3_monthly() -> pd.DataFrame:
     if start is None:
         raise ValueError("Could not find data start in Fama-French CSV (no YYYYMM line).")
 
-    # Find end: before 'Annual Factors' or the first blank line after data block
     end = None
     for i in range(start + 1, len(lines)):
         if lines[i].strip().startswith("Annual Factors"):
             end = i
             break
-        # Stop if we hit a blank line after at least a few rows of data
         if lines[i].strip() == "" and i > start + 5:
             end = i
             break
     if end is None:
         end = len(lines)
 
-    # Build a small CSV string with an explicit header
     header = "Date,Mkt-RF,SMB,HML,RF"
     csv_text = header + "\n" + "\n".join(lines[start:end])
 
@@ -77,11 +73,9 @@ def to_returns(prices: pd.DataFrame, freq: str = "M") -> pd.DataFrame:
     return prices.pct_change() * 100.0
 
 def run(tickers, start, end, freq, outdir="data"):
-    # --- Create auto-incremented output folder ---
     base = Path(outdir)
     base.mkdir(parents=True, exist_ok=True)
 
-    # Find the next available output number
     i = 1
     while (base / f"output{i}").exists():
         i += 1
