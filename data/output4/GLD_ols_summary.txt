@@ -1,0 +1,27 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                 Excess   R-squared:                       0.084
+Model:                            OLS   Adj. R-squared:                  0.057
+Method:                 Least Squares   F-statistic:                     3.150
+Date:                Fri, 10 Oct 2025   Prob (F-statistic):             0.0282
+Time:                        23:09:30   Log-Likelihood:                -296.45
+No. Observations:                 107   AIC:                             600.9
+Df Residuals:                     103   BIC:                             611.6
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.2114      0.390      0.542      0.589      -0.562       0.985
+Mkt-RF         0.1389      0.085      1.640      0.104      -0.029       0.307
+SMB           -0.3644      0.147     -2.482      0.015      -0.656      -0.073
+HML           -0.1390      0.099     -1.408      0.162      -0.335       0.057
+==============================================================================
+Omnibus:                        3.508   Durbin-Watson:                   2.223
+Prob(Omnibus):                  0.173   Jarque-Bera (JB):                3.132
+Skew:                           0.417   Prob(JB):                        0.209
+Kurtosis:                       3.082   Cond. No.                         5.03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
